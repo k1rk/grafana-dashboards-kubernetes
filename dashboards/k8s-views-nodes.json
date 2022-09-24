@@ -1,17 +1,14 @@
 {
-  "__inputs": [
-    {
-      "name": "DS_PROMETHEUS",
-      "label": "Prometheus",
-      "description": "",
-      "type": "datasource",
-      "pluginId": "prometheus",
-      "pluginName": "Prometheus"
-    }
-  ],
+  "__inputs": [{
+    "name": "DS_PROMETHEUS",
+    "label": "Prometheus",
+    "description": "",
+    "type": "datasource",
+    "pluginId": "prometheus",
+    "pluginName": "Prometheus"
+  }],
   "__elements": [],
-  "__requires": [
-    {
+  "__requires": [{
       "type": "grafana",
       "id": "grafana",
       "name": "Grafana",
@@ -49,26 +46,24 @@
     }
   ],
   "annotations": {
-    "list": [
-      {
-        "builtIn": 1,
-        "datasource": {
-          "type": "datasource",
-          "uid": "grafana"
-        },
-        "enable": true,
-        "hide": true,
-        "iconColor": "rgba(0, 211, 255, 1)",
-        "name": "Annotations & Alerts",
-        "target": {
-          "limit": 100,
-          "matchAny": false,
-          "tags": [],
-          "type": "dashboard"
-        },
+    "list": [{
+      "builtIn": 1,
+      "datasource": {
+        "type": "datasource",
+        "uid": "grafana"
+      },
+      "enable": true,
+      "hide": true,
+      "iconColor": "rgba(0, 211, 255, 1)",
+      "name": "Annotations & Alerts",
+      "target": {
+        "limit": 100,
+        "matchAny": false,
+        "tags": [],
         "type": "dashboard"
-      }
-    ]
+      },
+      "type": "dashboard"
+    }]
   },
   "description": "This is a modern 'Nodes View' dashboard for your Kubernetes cluster(s). Made for kube-prometheus-stack and take advantage of the latest Grafana features. GitHub repository: https://github.com/dotdc/grafana-dashboards-kubernetes",
   "editable": true,
@@ -76,8 +71,7 @@
   "graphTooltip": 1,
   "links": [],
   "liveNow": false,
-  "panels": [
-    {
+  "panels": [{
       "collapsed": false,
       "datasource": {
         "type": "prometheus",
@@ -107,8 +101,7 @@
           "min": 0,
           "thresholds": {
             "mode": "percentage",
-            "steps": [
-              {
+            "steps": [{
                 "color": "green",
                 "value": null
               },
@@ -147,20 +140,18 @@
         "text": {}
       },
       "pluginVersion": "8.5.0",
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${datasource}"
-          },
-          "exemplar": false,
-          "expr": "avg(1-rate(node_cpu_seconds_total{mode=\"idle\", instance=\"$instance\"}[$__rate_interval]))",
-          "instant": true,
-          "interval": "$resolution",
-          "legendFormat": "",
-          "refId": "A"
-        }
-      ],
+      "targets": [{
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${datasource}"
+        },
+        "exemplar": false,
+        "expr": "avg(1-rate(node_cpu_seconds_total{mode=\"idle\", instance=\"$instance\"}[$__rate_interval]))",
+        "instant": true,
+        "interval": "$resolution",
+        "legendFormat": "",
+        "refId": "A"
+      }],
       "title": "CPU  Usage",
       "type": "gauge"
     },
@@ -177,8 +168,7 @@
           "min": 0,
           "thresholds": {
             "mode": "percentage",
-            "steps": [
-              {
+            "steps": [{
                 "color": "green",
                 "value": null
               },
@@ -217,20 +207,18 @@
         "text": {}
       },
       "pluginVersion": "8.5.0",
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${datasource}"
-          },
-          "exemplar": false,
-          "expr": "sum(node_memory_MemTotal_bytes{instance=\"$instance\"} - node_memory_MemAvailable_bytes{instance=\"$instance\"}) / sum(node_memory_MemTotal_bytes{instance=\"$instance\"})",
-          "instant": true,
-          "interval": "$resolution",
-          "legendFormat": "",
-          "refId": "A"
-        }
-      ],
+      "targets": [{
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${datasource}"
+        },
+        "exemplar": false,
+        "expr": "sum(node_memory_MemTotal_bytes{instance=\"$instance\"} - node_memory_MemAvailable_bytes{instance=\"$instance\"}) / sum(node_memory_MemTotal_bytes{instance=\"$instance\"})",
+        "instant": true,
+        "interval": "$resolution",
+        "legendFormat": "",
+        "refId": "A"
+      }],
       "title": "RAM Usage",
       "type": "gauge"
     },
@@ -245,12 +233,10 @@
           "noValue": "0",
           "thresholds": {
             "mode": "absolute",
-            "steps": [
-              {
-                "color": "blue",
-                "value": null
-              }
-            ]
+            "steps": [{
+              "color": "blue",
+              "value": null
+            }]
           }
         },
         "overrides": []
@@ -278,19 +264,17 @@
         "textMode": "value"
       },
       "pluginVersion": "8.5.0",
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${datasource}"
-          },
-          "exemplar": true,
-          "expr": "sum(kube_pod_info{node=\"$node\"})",
-          "interval": "",
-          "legendFormat": "",
-          "refId": "A"
-        }
-      ],
+      "targets": [{
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${datasource}"
+        },
+        "exemplar": true,
+        "expr": "sum(kube_pod_info{node=\"$node\"})",
+        "interval": "",
+        "legendFormat": "",
+        "refId": "A"
+      }],
       "title": "Pods on node",
       "type": "stat"
     },
@@ -309,11 +293,15 @@
             "displayMode": "auto",
             "inspect": false
           },
+          "links": [{
+            "targetBlank": true,
+            "title": "Pod details",
+            "url": "/d/k8s_views_pods/kubernetes-views-pods?${datasource:queryparam}&var-namespace=${__data.fields.namespace}&var-pod=${__data.fields.pod}&${resolution:queryparam}&${__url_time_range}"
+          }],
           "mappings": [],
           "thresholds": {
             "mode": "absolute",
-            "steps": [
-              {
+            "steps": [{
                 "color": "green",
                 "value": null
               },
@@ -324,66 +312,55 @@
             ]
           }
         },
-        "overrides": [
-          {
+        "overrides": [{
             "matcher": {
               "id": "byName",
               "options": "pod"
             },
-            "properties": [
-              {
-                "id": "custom.width",
-                "value": 416
-              }
-            ]
+            "properties": [{
+              "id": "custom.width",
+              "value": 416
+            }]
           },
           {
             "matcher": {
               "id": "byName",
               "options": "priority_class"
             },
-            "properties": [
-              {
-                "id": "custom.width",
-                "value": 176
-              }
-            ]
+            "properties": [{
+              "id": "custom.width",
+              "value": 176
+            }]
           },
           {
             "matcher": {
               "id": "byName",
               "options": "pod_ip"
             },
-            "properties": [
-              {
-                "id": "custom.width",
-                "value": 157
-              }
-            ]
+            "properties": [{
+              "id": "custom.width",
+              "value": 157
+            }]
           },
           {
             "matcher": {
               "id": "byName",
               "options": "created_by_kind"
             },
-            "properties": [
-              {
-                "id": "custom.width",
-                "value": 205
-              }
-            ]
+            "properties": [{
+              "id": "custom.width",
+              "value": 205
+            }]
           },
           {
             "matcher": {
               "id": "byName",
               "options": "namespace"
             },
-            "properties": [
-              {
-                "id": "custom.width",
-                "value": 263
-              }
-            ]
+            "properties": [{
+              "id": "custom.width",
+              "value": 263
+            }]
           }
         ]
       },
@@ -406,23 +383,20 @@
         "sortBy": []
       },
       "pluginVersion": "8.5.0",
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${datasource}"
-          },
-          "exemplar": true,
-          "expr": "kube_pod_info{node=\"$node\"}",
-          "format": "table",
-          "interval": "",
-          "legendFormat": "",
-          "refId": "A"
-        }
-      ],
+      "targets": [{
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${datasource}"
+        },
+        "exemplar": true,
+        "expr": "kube_pod_info{node=\"$node\"}",
+        "format": "table",
+        "interval": "",
+        "legendFormat": "",
+        "refId": "A"
+      }],
       "title": "List of pods on node ($node)",
-      "transformations": [
-        {
+      "transformations": [{
           "id": "organize",
           "options": {
             "excludeByName": {
@@ -518,12 +492,10 @@
           "noValue": "0",
           "thresholds": {
             "mode": "absolute",
-            "steps": [
-              {
-                "color": "rgb(255, 255, 255)",
-                "value": null
-              }
-            ]
+            "steps": [{
+              "color": "rgb(255, 255, 255)",
+              "value": null
+            }]
           },
           "unit": "none"
         },
@@ -552,20 +524,18 @@
         "textMode": "auto"
       },
       "pluginVersion": "8.5.0",
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${datasource}"
-          },
-          "exemplar": false,
-          "expr": "sum(1-rate(node_cpu_seconds_total{mode=\"idle\", instance=\"$instance\"}[$__rate_interval]))",
-          "instant": true,
-          "interval": "$resolution",
-          "legendFormat": "",
-          "refId": "A"
-        }
-      ],
+      "targets": [{
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${datasource}"
+        },
+        "exemplar": false,
+        "expr": "sum(1-rate(node_cpu_seconds_total{mode=\"idle\", instance=\"$instance\"}[$__rate_interval]))",
+        "instant": true,
+        "interval": "$resolution",
+        "legendFormat": "",
+        "refId": "A"
+      }],
       "title": "CPU Used",
       "type": "stat"
     },
@@ -580,12 +550,10 @@
           "noValue": "0",
           "thresholds": {
             "mode": "absolute",
-            "steps": [
-              {
-                "color": "rgb(255, 255, 255)",
-                "value": null
-              }
-            ]
+            "steps": [{
+              "color": "rgb(255, 255, 255)",
+              "value": null
+            }]
           },
           "unit": "none"
         },
@@ -614,19 +582,17 @@
         "textMode": "auto"
       },
       "pluginVersion": "8.5.0",
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${datasource}"
-          },
-          "exemplar": true,
-          "expr": "sum(machine_cpu_cores{node=\"$node\"})",
-          "interval": "$resolution",
-          "legendFormat": "",
-          "refId": "A"
-        }
-      ],
+      "targets": [{
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${datasource}"
+        },
+        "exemplar": true,
+        "expr": "sum(machine_cpu_cores{node=\"$node\"})",
+        "interval": "$resolution",
+        "legendFormat": "",
+        "refId": "A"
+      }],
       "title": "CPU Total",
       "type": "stat"
     },
@@ -641,12 +607,10 @@
           "noValue": "0",
           "thresholds": {
             "mode": "absolute",
-            "steps": [
-              {
-                "color": "rgb(255, 255, 255)",
-                "value": null
-              }
-            ]
+            "steps": [{
+              "color": "rgb(255, 255, 255)",
+              "value": null
+            }]
           },
           "unit": "bytes"
         },
@@ -675,20 +639,18 @@
         "textMode": "auto"
       },
       "pluginVersion": "8.5.0",
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${datasource}"
-          },
-          "exemplar": false,
-          "expr": "sum(node_memory_MemTotal_bytes{instance=\"$instance\"} - node_memory_MemAvailable_bytes{instance=\"$instance\"})",
-          "instant": true,
-          "interval": "",
-          "legendFormat": "",
-          "refId": "A"
-        }
-      ],
+      "targets": [{
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${datasource}"
+        },
+        "exemplar": false,
+        "expr": "sum(node_memory_MemTotal_bytes{instance=\"$instance\"} - node_memory_MemAvailable_bytes{instance=\"$instance\"})",
+        "instant": true,
+        "interval": "",
+        "legendFormat": "",
+        "refId": "A"
+      }],
       "title": "RAM Used",
       "type": "stat"
     },
@@ -703,12 +665,10 @@
           "noValue": "0",
           "thresholds": {
             "mode": "absolute",
-            "steps": [
-              {
-                "color": "rgb(255, 255, 255)",
-                "value": null
-              }
-            ]
+            "steps": [{
+              "color": "rgb(255, 255, 255)",
+              "value": null
+            }]
           },
           "unit": "bytes"
         },
@@ -737,20 +697,18 @@
         "textMode": "auto"
       },
       "pluginVersion": "8.5.0",
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${datasource}"
-          },
-          "exemplar": true,
-          "expr": "machine_memory_bytes{node=\"$node\"}",
-          "instant": false,
-          "interval": "",
-          "legendFormat": "",
-          "refId": "A"
-        }
-      ],
+      "targets": [{
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${datasource}"
+        },
+        "exemplar": true,
+        "expr": "machine_memory_bytes{node=\"$node\"}",
+        "instant": false,
+        "interval": "",
+        "legendFormat": "",
+        "refId": "A"
+      }],
       "title": "RAM Total",
       "type": "stat"
     },
@@ -765,8 +723,7 @@
           "noValue": "0",
           "thresholds": {
             "mode": "absolute",
-            "steps": [
-              {
+            "steps": [{
                 "color": "green",
                 "value": null
               },
@@ -807,20 +764,18 @@
         "textMode": "auto"
       },
       "pluginVersion": "8.5.0",
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${datasource}"
-          },
-          "exemplar": true,
-          "expr": "node_time_seconds{instance=\"$instance\"} - node_boot_time_seconds{instance=\"$instance\"}",
-          "instant": false,
-          "interval": "",
-          "legendFormat": "",
-          "refId": "A"
-        }
-      ],
+      "targets": [{
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${datasource}"
+        },
+        "exemplar": true,
+        "expr": "node_time_seconds{instance=\"$instance\"} - node_boot_time_seconds{instance=\"$instance\"}",
+        "instant": false,
+        "interval": "",
+        "legendFormat": "",
+        "refId": "A"
+      }],
       "title": "uptime",
       "type": "stat"
     },
@@ -886,8 +841,7 @@
           "max": 100,
           "thresholds": {
             "mode": "absolute",
-            "steps": [
-              {
+            "steps": [{
                 "color": "green",
                 "value": null
               },
@@ -919,21 +873,19 @@
           "sort": "none"
         }
       },
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${datasource}"
-          },
-          "exemplar": true,
-          "expr": "avg(rate(node_cpu_seconds_total{instance=\"$instance\"}[$__rate_interval]) * 100) by (mode)",
-          "hide": false,
-          "instant": false,
-          "interval": "$resolution",
-          "legendFormat": "{{ mode }}",
-          "refId": "A"
-        }
-      ],
+      "targets": [{
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${datasource}"
+        },
+        "exemplar": true,
+        "expr": "avg(rate(node_cpu_seconds_total{instance=\"$instance\"}[$__rate_interval]) * 100) by (mode)",
+        "hide": false,
+        "instant": false,
+        "interval": "$resolution",
+        "legendFormat": "{{ mode }}",
+        "refId": "A"
+      }],
       "title": "CPU Usage",
       "type": "timeseries"
     },
@@ -981,8 +933,7 @@
           "mappings": [],
           "thresholds": {
             "mode": "absolute",
-            "steps": [
-              {
+            "steps": [{
                 "color": "green",
                 "value": null
               },
@@ -1014,8 +965,7 @@
           "sort": "desc"
         }
       },
-      "targets": [
-        {
+      "targets": [{
           "datasource": {
             "type": "prometheus",
             "uid": "${datasource}"
@@ -1144,8 +1094,7 @@
           "mappings": [],
           "thresholds": {
             "mode": "absolute",
-            "steps": [
-              {
+            "steps": [{
                 "color": "green",
                 "value": null
               },
@@ -1178,19 +1127,17 @@
         }
       },
       "pluginVersion": "8.3.3",
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${datasource}"
-          },
-          "exemplar": true,
-          "expr": "sum(rate(container_cpu_usage_seconds_total{node=\"$node\", image!=\"\"}[$__rate_interval])) by (pod)",
-          "interval": "$resolution",
-          "legendFormat": "{{ pod }}",
-          "refId": "A"
-        }
-      ],
+      "targets": [{
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${datasource}"
+        },
+        "exemplar": true,
+        "expr": "sum(rate(container_cpu_usage_seconds_total{node=\"$node\", image!=\"\"}[$__rate_interval])) by (pod)",
+        "interval": "$resolution",
+        "legendFormat": "{{ pod }}",
+        "refId": "A"
+      }],
       "title": "CPU usage by Pod",
       "type": "timeseries"
     },
@@ -1235,8 +1182,7 @@
           "mappings": [],
           "thresholds": {
             "mode": "absolute",
-            "steps": [
-              {
+            "steps": [{
                 "color": "green",
                 "value": null
               },
@@ -1269,19 +1215,17 @@
         }
       },
       "pluginVersion": "8.3.3",
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${datasource}"
-          },
-          "exemplar": true,
-          "expr": "sum(container_memory_working_set_bytes{node=\"$node\", image!=\"\"}) by (pod)",
-          "interval": "$resolution",
-          "legendFormat": "{{ pod }}",
-          "refId": "A"
-        }
-      ],
+      "targets": [{
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${datasource}"
+        },
+        "exemplar": true,
+        "expr": "sum(container_memory_working_set_bytes{node=\"$node\", image!=\"\"}) by (pod)",
+        "interval": "$resolution",
+        "legendFormat": "{{ pod }}",
+        "refId": "A"
+      }],
       "title": "Memory usage by Pod",
       "type": "timeseries"
     },
@@ -1346,8 +1290,7 @@
           "mappings": [],
           "thresholds": {
             "mode": "absolute",
-            "steps": [
-              {
+            "steps": [{
                 "color": "green",
                 "value": null
               },
@@ -1378,8 +1321,7 @@
           "sort": "desc"
         }
       },
-      "targets": [
-        {
+      "targets": [{
           "datasource": {
             "type": "prometheus",
             "uid": "${datasource}"
@@ -1465,8 +1407,7 @@
           "mappings": [],
           "thresholds": {
             "mode": "absolute",
-            "steps": [
-              {
+            "steps": [{
                 "color": "green",
                 "value": null
               },
@@ -1497,8 +1438,7 @@
           "sort": "desc"
         }
       },
-      "targets": [
-        {
+      "targets": [{
           "datasource": {
             "type": "prometheus",
             "uid": "${datasource}"
@@ -1574,8 +1514,7 @@
           "mappings": [],
           "thresholds": {
             "mode": "absolute",
-            "steps": [
-              {
+            "steps": [{
                 "color": "green",
                 "value": null
               },
@@ -1606,8 +1545,7 @@
           "sort": "none"
         }
       },
-      "targets": [
-        {
+      "targets": [{
           "datasource": {
             "type": "prometheus",
             "uid": "${datasource}"
@@ -1682,8 +1620,7 @@
           "mappings": [],
           "thresholds": {
             "mode": "absolute",
-            "steps": [
-              {
+            "steps": [{
                 "color": "green",
                 "value": null
               },
@@ -1715,8 +1652,7 @@
           "sort": "desc"
         }
       },
-      "targets": [
-        {
+      "targets": [{
           "datasource": {
             "type": "prometheus",
             "uid": "${datasource}"
@@ -1807,8 +1743,7 @@
           "mappings": [],
           "thresholds": {
             "mode": "absolute",
-            "steps": [
-              {
+            "steps": [{
                 "color": "green",
                 "value": null
               },
@@ -1841,8 +1776,7 @@
         }
       },
       "pluginVersion": "8.3.3",
-      "targets": [
-        {
+      "targets": [{
           "datasource": {
             "type": "prometheus",
             "uid": "${datasource}"
@@ -1913,8 +1847,7 @@
           "mappings": [],
           "thresholds": {
             "mode": "absolute",
-            "steps": [
-              {
+            "steps": [{
                 "color": "green",
                 "value": null
               },
@@ -1947,8 +1880,7 @@
         }
       },
       "pluginVersion": "8.3.3",
-      "targets": [
-        {
+      "targets": [{
           "datasource": {
             "type": "prometheus",
             "uid": "${datasource}"
@@ -2017,8 +1949,7 @@
           "mappings": [],
           "thresholds": {
             "mode": "absolute",
-            "steps": [
-              {
+            "steps": [{
                 "color": "green",
                 "value": null
               },
@@ -2051,8 +1982,7 @@
         }
       },
       "pluginVersion": "8.3.3",
-      "targets": [
-        {
+      "targets": [{
           "datasource": {
             "type": "prometheus",
             "uid": "${datasource}"
@@ -2123,8 +2053,7 @@
           "mappings": [],
           "thresholds": {
             "mode": "absolute",
-            "steps": [
-              {
+            "steps": [{
                 "color": "green",
                 "value": null
               },
@@ -2157,8 +2086,7 @@
         }
       },
       "pluginVersion": "8.3.3",
-      "targets": [
-        {
+      "targets": [{
           "datasource": {
             "type": "prometheus",
             "uid": "${datasource}"
@@ -2227,8 +2155,7 @@
           "mappings": [],
           "thresholds": {
             "mode": "absolute",
-            "steps": [
-              {
+            "steps": [{
                 "color": "green",
                 "value": null
               },
@@ -2261,21 +2188,19 @@
         }
       },
       "pluginVersion": "8.3.3",
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${datasource}"
-          },
-          "editorMode": "code",
-          "exemplar": true,
-          "expr": "node_netstat_Tcp_CurrEstab{instance=\"$instance\"}",
-          "instant": false,
-          "interval": "$resolution",
-          "legendFormat": "TCP Currently Established",
-          "refId": "A"
-        }
-      ],
+      "targets": [{
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${datasource}"
+        },
+        "editorMode": "code",
+        "exemplar": true,
+        "expr": "node_netstat_Tcp_CurrEstab{instance=\"$instance\"}",
+        "instant": false,
+        "interval": "$resolution",
+        "legendFormat": "TCP Currently Established",
+        "refId": "A"
+      }],
       "title": "TCP Currently Established",
       "type": "timeseries"
     },
@@ -2320,8 +2245,7 @@
           "mappings": [],
           "thresholds": {
             "mode": "absolute",
-            "steps": [
-              {
+            "steps": [{
                 "color": "green",
                 "value": null
               },
@@ -2333,23 +2257,19 @@
           },
           "unit": "none"
         },
-        "overrides": [
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "NF Conntrack limit"
-            },
-            "properties": [
-              {
-                "id": "color",
-                "value": {
-                  "fixedColor": "red",
-                  "mode": "fixed"
-                }
-              }
-            ]
-          }
-        ]
+        "overrides": [{
+          "matcher": {
+            "id": "byName",
+            "options": "NF Conntrack limit"
+          },
+          "properties": [{
+            "id": "color",
+            "value": {
+              "fixedColor": "red",
+              "mode": "fixed"
+            }
+          }]
+        }]
       },
       "gridPos": {
         "h": 8,
@@ -2370,8 +2290,7 @@
         }
       },
       "pluginVersion": "8.3.3",
-      "targets": [
-        {
+      "targets": [{
           "datasource": {
             "type": "prometheus",
             "uid": "${datasource}"
@@ -2461,8 +2380,7 @@
           "mappings": [],
           "thresholds": {
             "mode": "absolute",
-            "steps": [
-              {
+            "steps": [{
                 "color": "green",
                 "value": null
               },
@@ -2495,21 +2413,19 @@
         }
       },
       "pluginVersion": "8.3.3",
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${datasource}"
-          },
-          "editorMode": "code",
-          "exemplar": true,
-          "expr": "sum(kubelet_volume_stats_used_bytes{node=\"$node\"}) by (persistentvolumeclaim) / sum(kubelet_volume_stats_capacity_bytes{node=\"$node\"}) by (persistentvolumeclaim)",
-          "interval": "$resolution",
-          "legendFormat": "{{ persistentvolumeclaim }}",
-          "range": true,
-          "refId": "A"
-        }
-      ],
+      "targets": [{
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${datasource}"
+        },
+        "editorMode": "code",
+        "exemplar": true,
+        "expr": "sum(kubelet_volume_stats_used_bytes{node=\"$node\"}) by (persistentvolumeclaim) / sum(kubelet_volume_stats_capacity_bytes{node=\"$node\"}) by (persistentvolumeclaim)",
+        "interval": "$resolution",
+        "legendFormat": "{{ persistentvolumeclaim }}",
+        "range": true,
+        "refId": "A"
+      }],
       "title": "Persistent Volumes - Usage in %",
       "type": "timeseries"
     },
@@ -2532,8 +2448,7 @@
           "mappings": [],
           "thresholds": {
             "mode": "absolute",
-            "steps": [
-              {
+            "steps": [{
                 "color": "green",
                 "value": null
               },
@@ -2545,30 +2460,25 @@
           },
           "unit": "bytes"
         },
-        "overrides": [
-          {
+        "overrides": [{
             "matcher": {
               "id": "byName",
               "options": "Used"
             },
-            "properties": [
-              {
-                "id": "custom.width",
-                "value": 146
-              }
-            ]
+            "properties": [{
+              "id": "custom.width",
+              "value": 146
+            }]
           },
           {
             "matcher": {
               "id": "byName",
               "options": "Total"
             },
-            "properties": [
-              {
-                "id": "custom.width",
-                "value": 167
-              }
-            ]
+            "properties": [{
+              "id": "custom.width",
+              "value": 167
+            }]
           }
         ]
       },
@@ -2591,8 +2501,7 @@
         "sortBy": []
       },
       "pluginVersion": "8.5.0",
-      "targets": [
-        {
+      "targets": [{
           "datasource": {
             "type": "prometheus",
             "uid": "${datasource}"
@@ -2620,8 +2529,7 @@
         }
       ],
       "title": "Persistent Volumes - Usage in GB",
-      "transformations": [
-        {
+      "transformations": [{
           "id": "groupBy",
           "options": {
             "fields": {
@@ -2713,8 +2621,7 @@
           "mappings": [],
           "thresholds": {
             "mode": "absolute",
-            "steps": [
-              {
+            "steps": [{
                 "color": "green",
                 "value": null
               },
@@ -2747,21 +2654,19 @@
         }
       },
       "pluginVersion": "8.3.3",
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${datasource}"
-          },
-          "editorMode": "code",
-          "exemplar": true,
-          "expr": "sum(kubelet_volume_stats_inodes_used{node=\"$node\"}) by (persistentvolumeclaim) / sum(kubelet_volume_stats_inodes{node=\"$node\"}) by (persistentvolumeclaim) * 100",
-          "interval": "$resolution",
-          "legendFormat": "{{ persistentvolumeclaim }}",
-          "range": true,
-          "refId": "A"
-        }
-      ],
+      "targets": [{
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${datasource}"
+        },
+        "editorMode": "code",
+        "exemplar": true,
+        "expr": "sum(kubelet_volume_stats_inodes_used{node=\"$node\"}) by (persistentvolumeclaim) / sum(kubelet_volume_stats_inodes{node=\"$node\"}) by (persistentvolumeclaim) * 100",
+        "interval": "$resolution",
+        "legendFormat": "{{ persistentvolumeclaim }}",
+        "range": true,
+        "refId": "A"
+      }],
       "title": "Persistent Volumes - Inodes",
       "type": "timeseries"
     },
@@ -2824,8 +2729,7 @@
           "mappings": [],
           "thresholds": {
             "mode": "absolute",
-            "steps": [
-              {
+            "steps": [{
                 "color": "green",
                 "value": null
               },
@@ -2858,22 +2762,20 @@
         }
       },
       "pluginVersion": "8.3.3",
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${datasource}"
-          },
-          "editorMode": "code",
-          "exemplar": true,
-          "expr": "100 - ((node_filesystem_avail_bytes{instance=\"$instance\"} * 100) / node_filesystem_size_bytes{instance=\"$instance\"})",
-          "hide": false,
-          "interval": "$resolution",
-          "legendFormat": "{{ mountpoint }}",
-          "range": true,
-          "refId": "A"
-        }
-      ],
+      "targets": [{
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${datasource}"
+        },
+        "editorMode": "code",
+        "exemplar": true,
+        "expr": "100 - ((node_filesystem_avail_bytes{instance=\"$instance\"} * 100) / node_filesystem_size_bytes{instance=\"$instance\"})",
+        "hide": false,
+        "interval": "$resolution",
+        "legendFormat": "{{ mountpoint }}",
+        "range": true,
+        "refId": "A"
+      }],
       "title": "FS usage in %",
       "type": "timeseries"
     },
@@ -2919,8 +2821,7 @@
           "mappings": [],
           "thresholds": {
             "mode": "absolute",
-            "steps": [
-              {
+            "steps": [{
                 "color": "green",
                 "value": null
               },
@@ -2953,22 +2854,20 @@
         }
       },
       "pluginVersion": "8.3.3",
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${datasource}"
-          },
-          "editorMode": "code",
-          "exemplar": true,
-          "expr": "100 - (node_filesystem_files_free{instance=\"$instance\"} / node_filesystem_files{instance=\"$instance\"} * 100)",
-          "hide": false,
-          "interval": "$resolution",
-          "legendFormat": "{{ mountpoint }}",
-          "range": true,
-          "refId": "A"
-        }
-      ],
+      "targets": [{
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${datasource}"
+        },
+        "editorMode": "code",
+        "exemplar": true,
+        "expr": "100 - (node_filesystem_files_free{instance=\"$instance\"} / node_filesystem_files{instance=\"$instance\"} * 100)",
+        "hide": false,
+        "interval": "$resolution",
+        "legendFormat": "{{ mountpoint }}",
+        "range": true,
+        "refId": "A"
+      }],
       "title": "FS inode usage in %",
       "type": "timeseries"
     },
@@ -3014,8 +2913,7 @@
           "mappings": [],
           "thresholds": {
             "mode": "absolute",
-            "steps": [
-              {
+            "steps": [{
                 "color": "green",
                 "value": null
               },
@@ -3048,21 +2946,19 @@
         }
       },
       "pluginVersion": "8.3.3",
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${datasource}"
-          },
-          "editorMode": "code",
-          "exemplar": true,
-          "expr": "rate(node_disk_read_bytes_total{instance=\"$instance\"}[$__rate_interval])",
-          "interval": "$resolution",
-          "legendFormat": "{{device}}",
-          "range": true,
-          "refId": "A"
-        }
-      ],
+      "targets": [{
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${datasource}"
+        },
+        "editorMode": "code",
+        "exemplar": true,
+        "expr": "rate(node_disk_read_bytes_total{instance=\"$instance\"}[$__rate_interval])",
+        "interval": "$resolution",
+        "legendFormat": "{{device}}",
+        "range": true,
+        "refId": "A"
+      }],
       "title": "Reads by disk (bytes)",
       "type": "timeseries"
     },
@@ -3108,8 +3004,7 @@
           "mappings": [],
           "thresholds": {
             "mode": "absolute",
-            "steps": [
-              {
+            "steps": [{
                 "color": "green",
                 "value": null
               },
@@ -3142,22 +3037,20 @@
         }
       },
       "pluginVersion": "8.3.3",
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${datasource}"
-          },
-          "editorMode": "code",
-          "exemplar": true,
-          "expr": "rate(node_disk_written_bytes_total{instance=\"$instance\"}[$__rate_interval])",
-          "hide": false,
-          "interval": "$resolution",
-          "legendFormat": "{{device}}",
-          "range": true,
-          "refId": "A"
-        }
-      ],
+      "targets": [{
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${datasource}"
+        },
+        "editorMode": "code",
+        "exemplar": true,
+        "expr": "rate(node_disk_written_bytes_total{instance=\"$instance\"}[$__rate_interval])",
+        "hide": false,
+        "interval": "$resolution",
+        "legendFormat": "{{device}}",
+        "range": true,
+        "refId": "A"
+      }],
       "title": "Writes by disk (bytes)",
       "type": "timeseries"
     },
@@ -3203,8 +3096,7 @@
           "mappings": [],
           "thresholds": {
             "mode": "absolute",
-            "steps": [
-              {
+            "steps": [{
                 "color": "green",
                 "value": null
               },
@@ -3237,21 +3129,19 @@
         }
       },
       "pluginVersion": "8.3.3",
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${datasource}"
-          },
-          "editorMode": "code",
-          "exemplar": true,
-          "expr": "rate(node_disk_reads_completed_total{instance=\"$instance\"}[$__rate_interval])",
-          "interval": "$resolution",
-          "legendFormat": "{{device}}",
-          "range": true,
-          "refId": "A"
-        }
-      ],
+      "targets": [{
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${datasource}"
+        },
+        "editorMode": "code",
+        "exemplar": true,
+        "expr": "rate(node_disk_reads_completed_total{instance=\"$instance\"}[$__rate_interval])",
+        "interval": "$resolution",
+        "legendFormat": "{{device}}",
+        "range": true,
+        "refId": "A"
+      }],
       "title": "Completed reads by disk",
       "type": "timeseries"
     },
@@ -3297,8 +3187,7 @@
           "mappings": [],
           "thresholds": {
             "mode": "absolute",
-            "steps": [
-              {
+            "steps": [{
                 "color": "green",
                 "value": null
               },
@@ -3331,22 +3220,20 @@
         }
       },
       "pluginVersion": "8.3.3",
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${datasource}"
-          },
-          "editorMode": "code",
-          "exemplar": true,
-          "expr": "rate(node_disk_writes_completed_total{instance=\"$instance\"}[$__rate_interval])",
-          "hide": false,
-          "interval": "$resolution",
-          "legendFormat": "{{device}}",
-          "range": true,
-          "refId": "A"
-        }
-      ],
+      "targets": [{
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${datasource}"
+        },
+        "editorMode": "code",
+        "exemplar": true,
+        "expr": "rate(node_disk_writes_completed_total{instance=\"$instance\"}[$__rate_interval])",
+        "hide": false,
+        "interval": "$resolution",
+        "legendFormat": "{{device}}",
+        "range": true,
+        "refId": "A"
+      }],
       "title": "Completed writes by disk",
       "type": "timeseries"
     },
@@ -3392,8 +3279,7 @@
           "mappings": [],
           "thresholds": {
             "mode": "absolute",
-            "steps": [
-              {
+            "steps": [{
                 "color": "green",
                 "value": null
               },
@@ -3426,21 +3312,19 @@
         }
       },
       "pluginVersion": "8.3.3",
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${datasource}"
-          },
-          "editorMode": "code",
-          "exemplar": true,
-          "expr": "rate(node_disk_io_now{instance=\"$instance\"}[$__rate_interval]) ",
-          "interval": "$resolution",
-          "legendFormat": "{{device}}",
-          "range": true,
-          "refId": "A"
-        }
-      ],
+      "targets": [{
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${datasource}"
+        },
+        "editorMode": "code",
+        "exemplar": true,
+        "expr": "rate(node_disk_io_now{instance=\"$instance\"}[$__rate_interval]) ",
+        "interval": "$resolution",
+        "legendFormat": "{{device}}",
+        "range": true,
+        "refId": "A"
+      }],
       "title": "Disk(s) io/s",
       "type": "timeseries"
     },
@@ -3486,8 +3370,7 @@
           "mappings": [],
           "thresholds": {
             "mode": "absolute",
-            "steps": [
-              {
+            "steps": [{
                 "color": "green",
                 "value": null
               },
@@ -3520,21 +3403,19 @@
         }
       },
       "pluginVersion": "8.3.3",
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${datasource}"
-          },
-          "editorMode": "code",
-          "exemplar": true,
-          "expr": "sum(node_filesystem_device_error) by (mountpoint)",
-          "interval": "$resolution",
-          "legendFormat": "{{ mountpoint }}",
-          "range": true,
-          "refId": "A"
-        }
-      ],
+      "targets": [{
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${datasource}"
+        },
+        "editorMode": "code",
+        "exemplar": true,
+        "expr": "sum(node_filesystem_device_error) by (mountpoint)",
+        "interval": "$resolution",
+        "legendFormat": "{{ mountpoint }}",
+        "range": true,
+        "refId": "A"
+      }],
       "title": "FS - Device Errors",
       "type": "timeseries"
     }
@@ -3547,8 +3428,7 @@
     "Prometheus"
   ],
   "templating": {
-    "list": [
-      {
+    "list": [{
         "current": {
           "selected": false,
           "text": "",
@@ -3602,8 +3482,7 @@
         "includeAll": false,
         "multi": false,
         "name": "resolution",
-        "options": [
-          {
+        "options": [{
             "selected": false,
             "text": "1s",
             "value": "1s"
